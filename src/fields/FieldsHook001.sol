@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-import "./interfaces/ICmdaoFieldsV2Router.sol";
+import "./interfaces/IOpenBbqFieldsV2Router.sol";
 
 contract FieldsHook001 {
-    ICmdaoFieldsV2Router public cmdaoFieldsV2Router;
+    IOpenBbqFieldsV2Router public openBbqFieldsV2Router;
     uint256 public peripheryIndexOnRouter;
 
     uint256 public baseHashRate; //immutable
@@ -22,15 +22,15 @@ contract FieldsHook001 {
     constructor(
         uint256 _peripheryIndexOnRouter,
         uint256 _baseHashRate,
-        address _cmdaoFieldsV2Router
+        address _openBbqFieldsV2Router
     ) {
         peripheryIndexOnRouter = _peripheryIndexOnRouter;
-        cmdaoFieldsV2Router = ICmdaoFieldsV2Router(_cmdaoFieldsV2Router);
+        openBbqFieldsV2Router = IOpenBbqFieldsV2Router(_openBbqFieldsV2Router);
         baseHashRate = _baseHashRate;
     }
 
     function setBonusMultiplier(uint256 _newBonusMultiplier) external {
-        require(cmdaoFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
+        require(openBbqFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
 
         emit SetBonusMultiplier(bonusMultiplier, _newBonusMultiplier);
 
@@ -38,7 +38,7 @@ contract FieldsHook001 {
     }
 
     function setHashRateForNftIndex(uint256 _nftIndex, uint256 _hashRate) external {
-        require(cmdaoFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
+        require(openBbqFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
         
         hashRateForNftIndex[_nftIndex] = _hashRate;
 
@@ -51,7 +51,7 @@ contract FieldsHook001 {
         uint256 _nftIdMax,
         uint256 _hashRate
     ) external {
-        require(cmdaoFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
+        require(openBbqFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
 
         for (uint256 i = _nftIdMin; i <= _nftIdMax; i++) {
             hashRateForNftId[_nftIndex][i] = _hashRate;
@@ -61,7 +61,7 @@ contract FieldsHook001 {
     }
 
     function setRewardEmission(uint256 _rewardTokenIndex, uint256 _emissionRate) external { // can be points by default until rewards are deposited on the router.
-        require(cmdaoFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
+        require(openBbqFieldsV2Router.peripheryOwner(peripheryIndexOnRouter) == msg.sender, "not peripheryOwner");
 
         rewardEmissionRate[_rewardTokenIndex] = _emissionRate;
         
@@ -69,7 +69,7 @@ contract FieldsHook001 {
     }
 
     function calculatePoint(uint256 _nftIndex, uint256 _nftId) public view returns(uint256) {
-        uint256 stakedTimestamp = cmdaoFieldsV2Router.stakedUseByPeriphery(peripheryIndexOnRouter, _nftIndex, _nftId);
+        uint256 stakedTimestamp = openBbqFieldsV2Router.stakedUseByPeriphery(peripheryIndexOnRouter, _nftIndex, _nftId);
         require(stakedTimestamp != 0, 'not stake on this periphery');
 
         uint256 _nftIndexHashRate = hashRateForNftIndex[_nftIndex];
@@ -95,11 +95,11 @@ contract FieldsHook001 {
         address _claimedTo,
         uint256 _claimedAmount
     ) internal {
-        cmdaoFieldsV2Router.sendRewardFromPeriphery(peripheryIndexOnRouter, _claimedTo, _rewardTokenIndex, _claimedAmount);
+        openBbqFieldsV2Router.sendRewardFromPeriphery(peripheryIndexOnRouter, _claimedTo, _rewardTokenIndex, _claimedAmount);
     }
 
     function _requestSyncNftStakedAtFromRouter(uint256 _nftIndex, uint256 _nftId) internal {
-        cmdaoFieldsV2Router.syncNftStakedAtFromPeriphery(peripheryIndexOnRouter, _nftIndex, _nftId);
+        openBbqFieldsV2Router.syncNftStakedAtFromPeriphery(peripheryIndexOnRouter, _nftIndex, _nftId);
     }
 
     function claimReward(
@@ -108,7 +108,7 @@ contract FieldsHook001 {
         uint256 _rewardTokenIndex,
         address _claimedTo
     ) external {
-        require(cmdaoFieldsV2Router.stakedData(_nftIndex, _nftId).nftOwnerOf == msg.sender, "not nft owner");
+        require(openBbqFieldsV2Router.stakedData(_nftIndex, _nftId).nftOwnerOf == msg.sender, "not nft owner");
         uint256 _claimedAmount = calculateReward(_nftIndex, _nftId, _rewardTokenIndex);
 
         _requestSyncNftStakedAtFromRouter(_nftIndex, _nftId);

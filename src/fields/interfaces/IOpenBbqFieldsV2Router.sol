@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.26;
 
-interface ICmdaoFieldsV2Router {
+interface IOpenBbqFieldsV2Router {
     function hooksCount() external view returns (uint256);
     function hooks(uint256) external view returns (address);
     function hooksIndexOf(address) external view returns (uint256);

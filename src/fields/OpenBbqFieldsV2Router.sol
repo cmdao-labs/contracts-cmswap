@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract CmdaoFieldsV2Router is Ownable {
+contract OpenBbqFieldsV2Router is Ownable {
     uint256 public hooksCount;
     mapping(uint256 => address) public hooks;
     mapping(address => uint256) public hooksIndexOf;
@@ -184,6 +184,7 @@ contract CmdaoFieldsV2Router is Ownable {
         address _robber
     ) external { // for gamification purposes, please ensure hook security
         require(periphery[_peripheryIndex] == msg.sender, "not periphery caller");
+        require(stakedUseByPeriphery[_peripheryIndex][_nftIndex][_nftId] != 0, "no allowance");
 
         IERC721(nfts[_nftIndex]).transferFrom(address(this), _robber, _nftId);
 

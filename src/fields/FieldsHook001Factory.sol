@@ -4,7 +4,7 @@ pragma solidity 0.8.26;
 import "./FieldsHook001.sol";
 
 contract FieldsHook001Factory {
-    ICmdaoFieldsV2Router public cmdaoFieldsV2Router;
+    IOpenBbqFieldsV2Router public openBbqFieldsV2Router;
 
     struct PeripheryMetadata { // partial mutable, can collect fees
         string name;
@@ -19,17 +19,17 @@ contract FieldsHook001Factory {
     event CreatePeriphery(uint256 indexed peripheryIndexOnRouter, address indexed peripheryAddress, address indexed peripheryOwner);
     event SetPeripheryMetadata(uint256 indexed peripheryIndexOnRouter, string name, string description, string banner, string cover);
 
-    constructor(address _cmdaoFieldsV2RouterAddr) {
-        cmdaoFieldsV2Router = ICmdaoFieldsV2Router(_cmdaoFieldsV2RouterAddr);
-        cmdaoFieldsV2Router.setHook(address(this));
+    constructor(address _openBbqFieldsV2Router) {
+        openBbqFieldsV2Router = IOpenBbqFieldsV2Router(_openBbqFieldsV2Router);
+        openBbqFieldsV2Router.setHook(address(this));
     }
 
     function createPeriphery(address _peripheryOwner, uint256 _baseHashRate) external payable { // can collect fees and/or provide incentives to adopt future hooks
-        require(msg.value == cmdaoFieldsV2Router.feeForCreatePeriphery().feeAmount, "inadequate for the creation fee");
+        require(msg.value == openBbqFieldsV2Router.feeForCreatePeriphery().feeAmount, "inadequate for the creation fee");
         
-        uint256 _peripheryIndexOnRouter = cmdaoFieldsV2Router.peripheryCount() + 1;
-        FieldsHook001 newPeriphery = new FieldsHook001(_peripheryIndexOnRouter, _baseHashRate, address(cmdaoFieldsV2Router));
-        cmdaoFieldsV2Router.setPeriphery{value: cmdaoFieldsV2Router.feeForCreatePeriphery().feeAmount}(address(newPeriphery), _peripheryOwner);
+        uint256 _peripheryIndexOnRouter = openBbqFieldsV2Router.peripheryCount() + 1;
+        FieldsHook001 newPeriphery = new FieldsHook001(_peripheryIndexOnRouter, _baseHashRate, address(openBbqFieldsV2Router));
+        openBbqFieldsV2Router.setPeriphery{value: openBbqFieldsV2Router.feeForCreatePeriphery().feeAmount}(address(newPeriphery), _peripheryOwner);
         peripheryMetadata[_peripheryIndexOnRouter].createdTime = block.timestamp;
         peripheryMetadata[_peripheryIndexOnRouter].creator = msg.sender;
 
@@ -43,7 +43,7 @@ contract FieldsHook001Factory {
         string memory _banner,
         string memory _cover
     ) external {
-        require(cmdaoFieldsV2Router.peripheryOwner(_peripheryIndex) == msg.sender, "not peripheryOwner");
+        require(openBbqFieldsV2Router.peripheryOwner(_peripheryIndex) == msg.sender, "not peripheryOwner");
 
         peripheryMetadata[_peripheryIndex].name = _name;
         peripheryMetadata[_peripheryIndex].description = _description;
