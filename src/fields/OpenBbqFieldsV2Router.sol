@@ -171,6 +171,7 @@ contract OpenBbqFieldsV2Router is Ownable {
         uint256 _nftId
     ) external {
         require(periphery[_peripheryIndex] == msg.sender, "not periphery caller");
+        require(stakedUseByPeriphery[_peripheryIndex][_nftIndex][_nftId] != 0, "no allowance");
 
         stakedUseByPeriphery[_peripheryIndex][_nftIndex][_nftId] = block.timestamp;
 
