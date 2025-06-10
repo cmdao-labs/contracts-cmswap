@@ -1,0 +1,95 @@
+{
+  "transactions": [
+    {
+      "hash": null,
+      "transactionType": "CALL",
+      "contractName": "BatchVerifyERC20Tokens",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "verifyToken(address)",
+      "arguments": [
+        "0x557628Dc219bB988DD198aAC169721931BFEC914"
+      ],
+      "transaction": {
+        "from": "0x1804c8ab1f12e6bbf3894d4083f33e07309d1f38",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0x4130276b000000000000000000000000557628dc219bb988dd198aac169721931bfec914",
+        "nonce": "0x0",
+        "chainId": "0x60"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": null,
+      "transactionType": "CALL",
+      "contractName": "BatchVerifyERC20Tokens",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "verifyToken(address)",
+      "arguments": [
+        "0x666F9512960f4681395f8DcFfAb3DB957e0D91Fc"
+      ],
+      "transaction": {
+        "from": "0x1804c8ab1f12e6bbf3894d4083f33e07309d1f38",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0x4130276b000000000000000000000000666f9512960f4681395f8dcffab3db957e0d91fc",
+        "nonce": "0x1",
+        "chainId": "0x60"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": null,
+      "transactionType": "CALL",
+      "contractName": "BatchVerifyERC20Tokens",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "verifyToken(address)",
+      "arguments": [
+        "0x1dF3b67CFAB3c9D5CcC936E9f368e82208ca6D23"
+      ],
+      "transaction": {
+        "from": "0x1804c8ab1f12e6bbf3894d4083f33e07309d1f38",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0x4130276b0000000000000000000000001df3b67cfab3c9d5ccc936e9f368e82208ca6d23",
+        "nonce": "0x2",
+        "chainId": "0x60"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": null,
+      "transactionType": "CALL",
+      "contractName": "BatchVerifyERC20Tokens",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "verifyToken(address)",
+      "arguments": [
+        "0xF27DF35ead39E2aed24cc05C52db303Ef4C4aA83"
+      ],
+      "transaction": {
+        "from": "0x1804c8ab1f12e6bbf3894d4083f33e07309d1f38",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0x4130276b000000000000000000000000f27df35ead39e2aed24cc05c52db303ef4c4aa83",
+        "nonce": "0x3",
+        "chainId": "0x60"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1748948424,
+  "chain": 96,
+  "commit": "3a35de0"
+}
