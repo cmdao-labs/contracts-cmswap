@@ -1,0 +1,20 @@
+Verification Results - Wed Aug 20 11:44:43 +07 2025
+Method: Foundry
+======================================
+Start verifying contract `0x16af49916A9Ca00a06F27839dc3dFe4158928b7e` deployed on 25925
+
+Submitting verification for [src/ERC20Token.sol:ERC20Token] 0x16af49916A9Ca00a06F27839dc3dFe4158928b7e.
+Contract source code already verified
+✓ SUCCESS: 0x16af49916a9ca00a06f27839dc3dfe4158928b7e (DoiKUB - DOIKUB)
+Start verifying contract `0x84566e3686476fd53F3ee8e8333F991B7383355A` deployed on 25925
+
+Submitting verification for [src/ERC20Token.sol:ERC20Token] 0x84566e3686476fd53F3ee8e8333F991B7383355A.
+Contract source code already verified
+✓ SUCCESS: 0x84566e3686476fd53f3ee8e8333f991b7383355a (KUB TO DA MOON - KTOAM)
+Start verifying contract `0xf7CaBA0EBf83A6Cd5140EEDE2286c79c3c3057D1` deployed on 25925
+
+Submitting verification for [src/ERC20Token.sol:ERC20Token] 0xf7CaBA0EBf83A6Cd5140EEDE2286c79c3c3057D1.
+Contract source code already verified
+✓ SUCCESS: 0xf7caba0ebf83a6cd5140eede2286c79c3c3057d1 (KubToMoon  - KTM )
+
+Summary: 3 successful, 0 failed
